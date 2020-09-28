@@ -1,0 +1,15 @@
+language: node_js
+sudo: false
+dist: trusty
+node_js:
+  - 10.9.0
+cache:
+  directories:
+    - "./node_modules"
+git:
+  depth: false
+
+before_install:
+  - sudo locale-gen zh_CN.GB18030
+script:
+  - "./deploy-cn.sh"

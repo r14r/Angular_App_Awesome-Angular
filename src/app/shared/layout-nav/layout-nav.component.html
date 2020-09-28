@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="mat-elevation-z6 header">
+  <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="drawer.toggle()"
+    *ngIf="isHandset">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <a routerLink="/">
+    <app-icon-angular></app-icon-angular>
+  </a>
+  <a routerLink="/">
+    <div *ngIf="!isHandset">
+      <img src="/assets/icons/logo.svg" alt="Angular 资源集锦"/>
+    </div>
+  </a>
+  <!--<app-search-box (search)="search($event)"></app-search-box>-->
+  <ng-container *ngIf="!isHandset">
+    <div class="flex-spacer"></div>
+    <a mat-button href="https://github.com/ng-docs/awesome-angular" target="_blank" aria-label="GitHub 仓库">
+      <app-icon-github></app-icon-github>
+    </a>
+  </ng-container>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [attr.role]="isHandset ? 'dialog' : 'navigation'"
+    [mode]="isHandset ? 'over' : 'side'"
+    [opened]="!isHandset" (click)="tryToClose(drawer)">
+    <ng-content></ng-content>
+  </mat-sidenav>
+  <mat-sidenav-content appPartialScroller>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
